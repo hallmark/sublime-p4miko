@@ -44,11 +44,52 @@ def execute_paramiko_command(command):
   finally:
       client.close()
 
-class P4MikoAddCommand(sublime_plugin.TextCommand):
+# Subclass this for commands that require focus on a file
+class P4MikoProjectFileCommand(sublime_plugin.TextCommand):
+  def is_enabled(self):
+    return (self.view.file_name() is not None)
+
+  def log_command_output(self, output, err, cmd_name):
+    if err:
+      print '(p4miko) p4 ' + cmd_name + ' err:'
+      out_lines = err.splitlines()
+      for line in out_lines:
+        print line
+    elif output:
+      print '(p4miko) p4 ' + cmd_name + ' output:'
+      out_lines = output.splitlines()
+      for line in out_lines:
+        print line
+    else:
+      print '(p4miko) no out/err output from p4 ' + cmd_name
+
+
+  def run(self, edit):
+    sublime.message_dialog('This command is not intended to be run directly. Subclass and override run().')
+
+class P4MikoAddCommand(P4MikoProjectFileCommand):
   def run(self, edit):
     print 'p4miko - Invoking p4 add for file: ' + self.view.file_name()
-    sublime.status_message('add not yet implemented')
+    remote_path = derive_remote_path(self.view.file_name())
+    output, err = execute_paramiko_command('p4 add ' + remote_path)
 
+    self.log_command_output(output, err, 'add')
+
+    out_lines = output.splitlines()
+    if out_lines:
+      status = out_lines[0]
+      if status.endswith('currently opened for add'):
+        sublime.status_message('p4: file already opened for add')
+      elif status.endswith('opened for add'):
+        sublime.status_message('p4: file opened for add')
+      elif status.endswith('can\'t add existing file'):
+        sublime.status_message('p4: file already exists in repo')
+      elif status.endswith('can\'t add (already opened for edit)'):
+        sublime.status_message('p4: file already exists in repo')
+      else:
+        sublime.status_message('p4: unable to add file: ' + status)
+    else:
+      sublime.status_message('p4: no output from p4 add')
 
 class P4MikoFilelogCommand(sublime_plugin.TextCommand):
   def run(self, edit):
@@ -82,7 +123,9 @@ class P4MikoRevertCommand(sublime_plugin.TextCommand):
       if out_lines:
         status = out_lines[0]
         if status.endswith('was edit, reverted'):
-          sublime.status_message('p4: file reverted')
+          sublime.status_message('p4: file reverted, no longer open for edit')
+        elif status.endswith('was add, abandoned'):
+          sublime.status_message('p4: file reverted, no longer added')
         elif status.endswith('file(s) not opened on this client.'):
           sublime.status_message('p4: file not opened on client')
         else:
@@ -91,20 +134,23 @@ class P4MikoRevertCommand(sublime_plugin.TextCommand):
         sublime.status_message('p4: no output from p4 revert')
 
 
-class P4MikoEditCommand(sublime_plugin.TextCommand):
-  def is_enabled(self):
-    return (self.view.file_name() is not None)
-
+class P4MikoEditCommand(P4MikoProjectFileCommand):
   def run(self, edit):
     print 'p4miko - Invoking p4 edit for file: ' + self.view.file_name()
     remote_path = derive_remote_path(self.view.file_name())
     output, err = execute_paramiko_command('p4 edit ' + remote_path)
 
-    print 'p4miko - p4 edit output:'
-    out_lines = output.splitlines()
-    for line in out_lines:
-      print line
-    if out_lines:
+    self.log_command_output(output, err, 'edit')
+
+    if err:
+      out_lines = err.splitlines()
+      status = out_lines[0]
+      if status.endswith('file(s) not on client.'):
+        sublime.status_message('p4: cannot edit file that has not been added')
+      else:
+        sublime.status_message('p4: unable to open file for edit: ' + status)
+    elif output:
+      out_lines = output.splitlines()
       status = out_lines[0]
       if status.endswith('currently opened for edit'):
         sublime.status_message('p4: file already opened for edit')
