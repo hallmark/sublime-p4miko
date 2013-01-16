@@ -7,7 +7,7 @@ Sublime Text 2 Perforce-over-SSH Plugin
   
       $ /Users/<username>/Library/Application Support/Sublime Text 2/Packages/
   
-  To view the `Library` folder in the Finder, click on the Go menu, hold down the Option key, and you should see the Library folder as a menu item.
+  Hint: To view the `Library` folder in the Finder, click on the Go menu, hold down the Option key, and you should see the Library folder as a menu item.
 
   You will also need to add a User settings file, ensure that the `paramiko` python package is installed, and optionally add a Sublime project-specific setting.
   
@@ -15,7 +15,7 @@ Sublime Text 2 Perforce-over-SSH Plugin
   
       $ /Users/<username>/Library/Application Support/Sublime Text 2/Packages/User/p4miko.sublime-settings
   
-  (Having trouble saving to the hidden `Library` folder? In the Save dialog, hit Command-Shift-`.` to toggle display of hidden files and folders.)
+  Hint: Having trouble saving to the hidden `Library` folder? In the Save dialog, hit Command-Shift-`.` to toggle display of hidden files and folders.
   
   The plugin user settings file `p4miko.sublime-settings` should look something like this:
 
