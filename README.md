@@ -43,6 +43,8 @@ If the plugin still does not appear to work (you may see a brief warning message
 
       $ sudo easy_install-2.6 paramiko
 
+For more help on installing `paramiko`, refer to the wiki page: <https://github.com/hallmark/sublime-p4miko/wiki/Installing-paramiko-Python-package>
+
 Finally, if the plugin does not appear to be picking up your most recent configuration or Python package installation changes, restart Sublime Text 2 and try again.
 
 ## Quick Start
