@@ -1,0 +1,6 @@
+{
+  "perforce_ssh_host": "localhost",
+  "perforce_local_client_prefix": null,
+  "perforce_ssh_remote_client_prefix": null,
+  "perforce_remote_project_prefix": null
+}

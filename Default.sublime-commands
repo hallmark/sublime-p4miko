@@ -1,0 +1,26 @@
+[
+    {
+        "caption": "Perforce SSH: Add",
+        "command": "p4_miko_add"
+    },
+    {
+        "caption": "Perforce SSH: Edit",
+        "command": "p4_miko_edit"
+    },
+    {
+        "caption": "Perforce SSH: File Revisions",
+        "command": "p4_miko_filelog"
+    },
+    {
+        "caption": "Perforce SSH: Diff",
+        "command": "p4_miko_diff"
+    },
+    {
+        "caption": "Perforce SSH: Revert File",
+        "command": "p4_miko_revert"
+    },
+    {
+        "caption": "Perforce SSH: Opened Project Files",
+        "command": "p4_miko_opened"
+    }
+]

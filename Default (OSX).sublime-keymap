@@ -1,0 +1,9 @@
+[
+  { "keys": ["ctrl+shift+i"], "command": "p4_miko_add" },
+  { "keys": ["ctrl+shift+e"], "command": "p4_miko_edit" },
+  { "keys": ["ctrl+shift+r"], "command": "p4_miko_revert" },
+  { "keys": ["ctrl+shift+d"], "command": "p4_miko_diff" },
+  { "keys": ["ctrl+shift+l"], "command": "p4_miko_filelog" },
+  { "keys": ["ctrl+shift+o"], "command": "p4_miko_opened" }
+  // { "keys": ["ctrl+shift+c"], "command": "p4_miko_opened" }
+]
