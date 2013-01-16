@@ -25,23 +25,25 @@ def derive_remote_path(local_path):
 
 def execute_paramiko_command(command):
   print command
+  client = None
   try:
-      client = paramiko.SSHClient()
-      client.load_system_host_keys()
-      client.set_missing_host_key_policy(paramiko.WarningPolicy)
+    client = paramiko.SSHClient()
+    client.load_system_host_keys()
+    client.set_missing_host_key_policy(paramiko.WarningPolicy)
 
-      try:
-        client.connect(ssh_host)
-      except socket.gaierror as e:
-        sublime.status_message('Unable to lookup SSH host')
-        # sublime.message_dialog('Unable to lookup SSH host')
-        return '', ''
+    try:
+      client.connect(ssh_host)
+    except socket.gaierror as e:
+      sublime.status_message('Unable to lookup SSH host')
+      # sublime.message_dialog('Unable to lookup SSH host')
+      return '', ''
 
-      stdin, stdout, stderr = client.exec_command(command)
-      stdin.close()
-      return stdout.read(), stderr.read()
+    stdin, stdout, stderr = client.exec_command(command)
+    stdin.close()
+    return stdout.read(), stderr.read()
 
   finally:
+    if client:
       client.close()
 
 # Subclass this for commands that require focus on a file
