@@ -5,7 +5,7 @@ Sublime Text 2 Perforce-over-SSH Plugin
 
   Currently, the best way to install the `sublime-p4miko` plugin is to download the ZIP file and unzip it into the following location:
   
-      $ /Users/<username>/Library/Application Support/Sublime Text 2/Packages/
+      /Users/<username>/Library/Application Support/Sublime Text 2/Packages/
   
   Hint: To view the `Library` folder in the Finder, click on the Go menu, hold down the Option key, and you should see the Library folder as a menu item.
 
@@ -13,7 +13,7 @@ Sublime Text 2 Perforce-over-SSH Plugin
   
   Create a new file in Sublime and save it to this location:
   
-      $ /Users/<username>/Library/Application Support/Sublime Text 2/Packages/User/p4miko.sublime-settings
+      /Users/<username>/Library/Application Support/Sublime Text 2/Packages/User/p4miko.sublime-settings
   
   Hint: Having trouble saving to the hidden `Library` folder? In the Save dialog, hit Command-Shift-`.` to toggle display of hidden files and folders.
   
@@ -38,6 +38,12 @@ Sublime Text 2 Perforce-over-SSH Plugin
   }
 }
 ```
+
+If the plugin still does not appear to work (you may see a brief warning message in the bottom status bar that says, "Install paramiko locally to enable p4miko plugin"), install the `paramiko` Python package for your Mac.  Sublime Text is configured to use Python 2.6, so you will need to install `paramiko` for Python 2.6:
+
+      $ sudo easy_install-2.6 paramiko
+
+Finally, if the plugin does not appear to be picking up your most recent configuration or Python package installation changes, restart Sublime Text 2 and try again.
 
 ## Quick Start
 
