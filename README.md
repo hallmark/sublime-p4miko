@@ -50,12 +50,14 @@ Finally, if the plugin does not appear to be picking up your most recent configu
 To view the opened files in a project, press Control-Shift-O.  
 To checkout/open a file for edit, press Control-Shift-E.  
 To revert changes for a file, press Control-Shift-R.  
+to add a file, press Control-Shift-I.  
 
 ## Features
 
   * p4 edit
   * p4 revert
   * p4 opened
+  * p4 add
 
 ## License 
 
