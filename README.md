@@ -27,6 +27,18 @@ Sublime Text 2 Perforce-over-SSH Plugin
 }
 ```
 
+  To configure a particular Sublime project so that the `p4 opened` command is enabled, edit the project settings (menu Project -> Edit Project) and add the `perforce_remote_project_prefix` setting as in this example:
+
+```js
+{
+  "folders": [],
+  "settings":
+  {
+    "perforce_remote_project_prefix": "/home/<username>/src/myproject/main"
+  }
+}
+```
+
 ## Quick Start
 
 To view the opened files in a project, press Control-Shift-O.  
